@@ -15,15 +15,72 @@
   import img12 from '$lib/img/icon-close.svg'
   import img13 from '$lib/img/icon-next.svg'
   import img14 from '$lib/img/icon-previous.svg'
-  let img = [img1,img2,img3,img4]
+  let img = [{id:1,im:img1},{id:2,im:img2},{id:3,im:img3},{id:4,im:img4}]
   let rev = false
   let deed = img1;
-  console.log($count)
-  let imgrev = img[0]++;
- 
-  const imgs =()=>{
-     imgrev = img[1]
+  let imgrev = img[0].im;
+  let id = 0
+
+  const incre =()=>{
+    if($count === 10){
+    return
+   }else{
+    $count++
+   }
   }
+
+  const decre =()=>{
+    if($count === 0){
+      return
+    }else{
+      $count--
+    }
+  }
+  
+  const imgs1 =()=>{
+    if(id == 0){
+      id++
+      imgrev = img[id].im
+      id = 1
+      console.log(id)
+    }else if(id == 1){
+      id++
+      imgrev = img[id].im
+      id = 2
+      console.log(id)
+    }else if(id == 2){
+      id++
+      imgrev = img[id].im
+      id = 3
+      console.log(id)
+    }else if(id == 3){
+      imgrev = img[id].im
+      id = 3
+      console.log(id)
+    }
+  }
+
+  const imgs2 =()=>{
+    if(id == 0){
+      return
+    }else if(id == 1){
+      id--
+      id = 0
+      imgrev = img[id].im
+      console.log(id)
+    }else if(id == 2){
+      id--
+      id = 1
+      imgrev = img[id].im
+      console.log(id)
+    }else if(id == 3){
+      id--
+      id = 2
+      imgrev = img[id].im
+      console.log(id)
+    } 
+  }
+  
 </script>
 
 <Head/>
@@ -55,9 +112,9 @@
     <p class="">$250.00</p>
     <div class="flex flex-row space-x-5 overflow-hidden">
       <div class="flex flex-row bg-gray-200 text-white rounded-lg md:w-1/3 w-1/3 md:items-center items-start md:mx-auto md:justify-around">
-        <img src="{img9}" alt="" width="10" height="5" class="text-orange-400 cursor-pointer" on:click={()=>{$count++}} on:keydown>
+        <img src="{img9}" alt="" width="10" height="5" class="text-orange-400 cursor-pointer" on:click={incre} on:keydown>
         <p class="text-black p-2 rounded-md font-bold">{$count}</p>
-        <img src="{img10}" alt="" width="10" height="5" class="text-orange-400 cursor-pointer" on:click={()=>{$count--}} on:keydown>
+        <img src="{img10}" alt="" width="10" height="5" class="text-orange-400 cursor-pointer" on:click={decre} on:keydown>
       </div>
       <div class="flex flex-row bg-orange-500 text-white rounded-lg  md:w-1/3 w-1/3 md:items-center items-start md:mx-auto md:justify-around">
         <p class = 'p-2'><span>{$count}</span><img src="{img11}" alt="" width="20" height="20" class ="text-white" ></p>
@@ -71,9 +128,10 @@
       cursor-pointer left-10"on:click={()=>{rev = false}} on:keydown>
         <div class="flex flex-row space-x-2 w-full h-full mx-auto justify-around">
             <img src="{img13}" alt="" width="5" height="5" class="w-10 h-10 relative top-36 rounded-full bg-white p-2 
-            cursor-pointer"on:click={imgs} on:keydown>
+            cursor-pointer" on:click={()=>{imgs1()}} on:keydown>
             <img src="{imgrev}" alt="" width="50" height="50" class="w-full rounded-md">
-            <img src="{img14}" alt="" width="5" height="5" class="w-10 h-10 relative top-36 rounded-full bg-white p-2"> 
+            <img src="{img14}" alt="" width="5" height="5" class="w-10 h-10 relative top-36 rounded-full bg-white p-2
+            cursor-pointer" on:click={()=>{imgs2()}} on:keydown>> 
         </div>
     </div>   
 {/if}
